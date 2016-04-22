@@ -1,5 +1,5 @@
-# congopro_clean_sessions
-Congopro utility program to clean MongoDB "sessions" collection. 
+# mongo_clean_sessions
+Utility program to cleanup MongoDB collection against time field. 
 
 ## Usage
 
@@ -7,7 +7,7 @@ Congopro utility program to clean MongoDB "sessions" collection.
       -c string
             MongoDB collection to cleanup. (default "sessions")
       -r int
-            MongoDB retention delai in hour(s). Default is 7 days (168 hours). (default 168)
+            MongoDB retention delai in hour(s). Default is 7 days (168 hours).
       -url string
             MongoDB connection URI. (default "mongodb://localhost:27017/test")
 
