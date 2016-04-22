@@ -13,4 +13,4 @@ Utility program to cleanup MongoDB collection against time field.
 
 ## Example
 
-    ./main -url=${CONGOPRO_MONGOLAB_URL} -c=sessions -r=72
+    ./main -url=${MONGOLAB_URL} -c=sessions -r=72
