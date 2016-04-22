@@ -15,4 +15,4 @@ Utility program to cleanup MongoDB collection by a specific time field.
 
 ## Example
 
-    ./main -url=${MONGOLAB_URL} -c=sessions -r=72
+    ./main -url=${MONGOLAB_URL} -c=sessions -f=updated_at -r=72
