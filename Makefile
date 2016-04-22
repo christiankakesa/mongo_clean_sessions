@@ -17,6 +17,11 @@ $(BINARY): $(SOURCES)
 install:
 	go install ${LDFLAGS} ./...
 
+.PHONY: fclean
+fclean: clean
+	if [ -f ${BINARY} ] ; then *.tar.gz ; fi
+
 .PHONY: clean
 clean:
-	if [ -f ${BINARY} ] ; then rm ${BINARY} *.tar.gz ; fi
+	if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
+
