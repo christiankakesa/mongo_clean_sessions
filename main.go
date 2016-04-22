@@ -12,6 +12,7 @@ import (
 
 var mongoUrl = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
 var collection = flag.String("c", "sessions", "MongoDB collection to cleanup.")
+var field = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
 var retention = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
 
 func main() {
@@ -23,6 +24,7 @@ func main() {
 	}
 	fmt.Println("MongoDB connection URL:              ", hostPort.Host)
 	fmt.Println("MongoDB collection to clean:         ", *collection)
+	fmt.Println("MongoDB collection field:            ", *field)
 	fmt.Println("MongoDB retention periode in hour(s):", *retention)
 	fmt.Println()
 
@@ -42,7 +44,7 @@ func main() {
 	fmt.Println(fmt.Sprintf("Number of item(s) in           %s: %d", *collection, counter))
 
 	duration := time.Now().Add(time.Duration(-*retention) * time.Hour)
-	query := bson.M{"updated_at": bson.M{"$lte": duration}}
+	query := bson.M{fmt.Sprintf("%s", *field): bson.M{"$lte": duration}}
 
 	counter_to_delete, err := Sessions.Find(query).Count()
 	if err != nil {
