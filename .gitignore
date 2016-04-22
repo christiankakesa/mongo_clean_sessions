@@ -1,5 +1,7 @@
 # .gitignore
 
 /main
-/congopro_clean_sessions
-/clean_sessions
+/mongo_clean_sessions
+/.#*
+/*.tar.gz
+	

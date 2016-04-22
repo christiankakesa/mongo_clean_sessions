@@ -15,6 +15,12 @@ var collection = flag.String("c", "sessions", "MongoDB collection to cleanup.")
 var field = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
 var retention = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
 
+// Version is initialized at compilation time
+var Version = "0.0.0"
+
+// BuildTime is initialized at compilation time
+var BuildTime = time.Now().Format(time.RFC3339)
+
 func main() {
 	flag.Parse()
 
