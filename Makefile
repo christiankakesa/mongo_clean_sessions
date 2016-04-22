@@ -19,9 +19,9 @@ install:
 
 .PHONY: fclean
 fclean: clean
-	if [ -f ${BINARY} ] ; then *.tar.gz ; fi
+	rm -f *.tar.gz ~* .#*
 
 .PHONY: clean
 clean:
-	if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
+	if [ -f ${BINARY} ] ; then rm -f ${BINARY} ; fi
 
