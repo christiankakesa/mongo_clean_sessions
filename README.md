@@ -18,5 +18,5 @@ Utility program to cleanup MongoDB collection by a specific time field.
 
 ### Simulation mode
 Just add a **-s** in command line:
+
     ./mongo_clean_sessions -s -url=${MONGOLAB_URL} -c=sessions -f=updated_at -r=72
-    
