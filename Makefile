@@ -25,4 +25,3 @@ fclean: clean
 .PHONY: clean
 clean:
 	if [ -f ${BINARY} ] ; then rm -f ${BINARY} ; fi
-
