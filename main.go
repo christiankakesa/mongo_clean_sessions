@@ -10,11 +10,11 @@ import (
 	"time"
 )
 
-var mongoUrl = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
-var collection = flag.String("c", "sessions", "MongoDB collection to cleanup.")
-var field = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
-var retention = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
-var simulation = flag.Bool("s", false, "Simulation mode, no deletion are send to the MongoDB database.")
+var urlFlag = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
+var cFlag = flag.String("c", "sessions", "MongoDB collection to cleanup.")
+var fFlag = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
+var rFlag = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
+var sFlag = flag.Bool("s", false, "Simulation mode, no deletion are send to the MongoDB database.")
 
 // Version is initialized at compilation time
 var Version = "0.0.0"
@@ -25,18 +25,19 @@ var BuildTime = time.Now().Format(time.RFC3339)
 func main() {
 	flag.Parse()
 
-	hostPort, err := url.Parse(*mongoUrl)
+	hostPort, err := url.Parse(*urlFlag)
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(fmt.Sprintf("[Mongo clean session - Version %s - at %s]", Version, BuildTime))
 	fmt.Println("MongoDB connection URL:              ", hostPort.Host)
-	fmt.Println("MongoDB collection to clean:         ", *collection)
-	fmt.Println("MongoDB collection field:            ", *field)
-	fmt.Println("MongoDB retention periode in hour(s):", *retention)
-	fmt.Println("Simulation mode:                     ", *simulation)
+	fmt.Println("MongoDB collection to clean:         ", *cFlag)
+	fmt.Println("MongoDB collection field:            ", *fFlag)
+	fmt.Println("MongoDB retention periode in hour(s):", *rFlag)
+	fmt.Println("Simulation mode:                     ", *sFlag)
 	fmt.Println()
 
-	session, err := mgo.Dial(*mongoUrl)
+	session, err := mgo.Dial(*urlFlag)
 	if err != nil {
 		panic(err)
 	}
@@ -44,28 +45,28 @@ func main() {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	Sessions := session.DB("").C(*collection)
+	Sessions := session.DB("").C(*cFlag)
 	counter, err := Sessions.Count()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(fmt.Sprintf("Number of item(s) in           %s: %d", *collection, counter))
+	fmt.Println(fmt.Sprintf("Number of item(s) in           %s: %d", *cFlag, counter))
 
-	duration := time.Now().Add(time.Duration(-*retention) * time.Hour)
-	query := bson.M{fmt.Sprintf("%s", *field): bson.M{"$lte": duration}}
+	duration := time.Now().Add(time.Duration(-*rFlag) * time.Hour)
+	query := bson.M{fmt.Sprintf("%s", *fFlag): bson.M{"$lte": duration}}
 
 	counter_to_delete, err := Sessions.Find(query).Count()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(fmt.Sprintf("Number of item(s) to delete in %s: %d", *collection, counter_to_delete))
+	fmt.Println(fmt.Sprintf("Number of item(s) to delete in %s: %d", *cFlag, counter_to_delete))
 
-	if *simulation == false {
+	if *sFlag == false {
 		info, err := Sessions.RemoveAll(query)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(fmt.Sprintf("Number of item(s) deleted in   %s: %d", *collection, info.Removed))
+		fmt.Println(fmt.Sprintf("Number of item(s) deleted in   %s: %d", *cFlag, info.Removed))
 	} else {
 		fmt.Println("[SIMULATION_MODE] In simulation mode no elements are deleted!!!")
 	}
