@@ -11,7 +11,7 @@ solaris/amd64 \
 windows/386 windows/amd64"
 
 VERSION=$(git tag -l | sort | tail -n1)
-BUILD_TIME=`date +%FT%T%z`
+BUILD_TIME=$(date +%FT%T%z)
 
 git push --all
 git push --tags
