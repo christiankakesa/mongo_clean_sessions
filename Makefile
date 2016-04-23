@@ -11,6 +11,7 @@ LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
 .DEFAULT_GOAL: $(BINARY)
 
 $(BINARY): $(SOURCES)
+	go get gopkg.in/mgo.v2
 	go build ${LDFLAGS} -o ${BINARY} main.go
 
 .PHONY: install
