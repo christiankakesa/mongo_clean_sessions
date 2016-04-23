@@ -2,7 +2,6 @@
 Utility program to cleanup MongoDB collection by a specific time field. 
 
 ## Usage
-
     Usage of ./mongo_clean_sessions:
       -c string
          MongoDB collection to cleanup. (default "sessions")
@@ -15,5 +14,9 @@ Utility program to cleanup MongoDB collection by a specific time field.
          MongoDB connection URI. (default "mongodb://localhost:27017/test")
 
 ## Example
+    ./mongo_clean_sessions -url=${MONGOLAB_URL} -c=sessions -f=updated_at -r=72
 
-    ./main -url=${MONGOLAB_URL} -c=sessions -f=updated_at -r=72
+### Simulation mode
+Just add a **-s** in command line:
+    ./mongo_clean_sessions -s -url=${MONGOLAB_URL} -c=sessions -f=updated_at -r=72
+    
