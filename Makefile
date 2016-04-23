@@ -3,7 +3,7 @@ SOURCES := $(shell find $(SOURCEDIR) -name '*.go')
 
 BINARY=mongo_clean_sessions
 
-VERSION=$(git tag -l | sort | tail -n1)
+VERSION=`git tag -l | sort | tail -n1`
 BUILD_TIME=`date +%FT%T%z`
 
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
