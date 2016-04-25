@@ -10,26 +10,28 @@ import (
 	"time"
 )
 
-var urlFlag = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
-var cFlag = flag.String("c", "sessions", "MongoDB collection to cleanup.")
-var fFlag = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
-var rFlag = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
-var sFlag = flag.Bool("s", false, "Simulation mode, no deletion are send to the MongoDB database.")
-
 // Version is initialized at compilation time
 var Version = "0.0.0"
 
 // BuildTime is initialized at compilation time
 var BuildTime = time.Now().Format(time.RFC3339)
 
-func main() {
-	flag.Parse()
+var urlFlag = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
+var cFlag = flag.String("c", "sessions", "MongoDB collection to cleanup.")
+var fFlag = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
+var rFlag = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
+var sFlag = flag.Bool("s", false, "Simulation mode, no deletion are send to the MongoDB database.")
 
+func init() {
+	flag.Parse()
+}
+
+func main() {
 	hostPort, err := url.Parse(*urlFlag)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(fmt.Sprintf("[Mongo clean session - Version %s - at %s]", Version, BuildTime))
+	fmt.Println(fmt.Sprintf("[Mongo clean session - Version %s (build at %s)]", Version, BuildTime))
 	fmt.Println("MongoDB connection URL:              ", hostPort.Host)
 	fmt.Println("MongoDB collection to clean:         ", *cFlag)
 	fmt.Println("MongoDB collection field:            ", *fFlag)
