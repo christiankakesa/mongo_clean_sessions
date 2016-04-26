@@ -16,17 +16,15 @@ var Version = "0.0.0"
 // BuildTime is initialized at compilation time
 var BuildTime = time.Now().Format(time.RFC3339)
 
-var urlFlag = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
-var cFlag = flag.String("c", "sessions", "MongoDB collection to cleanup.")
-var fFlag = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
-var rFlag = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
-var sFlag = flag.Bool("s", false, "Simulation mode, no deletion are send to the MongoDB database.")
-
-func init() {
-	flag.Parse()
-}
-
 func main() {
+	var urlFlag = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
+	var cFlag = flag.String("c", "sessions", "MongoDB collection to cleanup.")
+	var fFlag = flag.String("f", "updated_at", "MongoDB collection field with type 'time.Time'.")
+	var rFlag = flag.Int("r", 168, "MongoDB retention delai in hour(s). Default is 7 days (168 hours).")
+	var sFlag = flag.Bool("s", false, "Simulation mode, no deletion are send to the MongoDB database.")
+
+	flag.Parse()
+
 	hostPort, err := url.Parse(*urlFlag)
 	if err != nil {
 		log.Fatal(err)
