@@ -1,6 +1,22 @@
 # Mongo clean sessions
 Utility program to cleanup MongoDB collection by a specific time field. 
 
+## Installation
+### Download your platform archive
+Go to the **[releases]( https://github.com/fenicks/mongo_clean_sessions/releases)** section: https://github.com/fenicks/mongo_clean_sessions/releases, download and uncompress the archive corresponding to your platform:
+
+    wget https://github.com/fenicks/mongo_clean_sessions/releases/download/v0.9/mongo_clean_sessions-v0.9-linux-amd64.tar.gz
+    tar -xzf mongo_clean_sessions-v0.9-linux-amd64.tar.gz
+
+Run the program as described in next sections.
+
+### Build the binary
+You need a working **Go** development environment ([see the installation guide](https://golang.org/doc/install))
+
+    make
+
+Run the program as described in next sections.
+
 ## Usage
     Usage of ./mongo_clean_sessions:
       -c string
