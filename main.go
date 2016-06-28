@@ -14,7 +14,7 @@ import (
 var Version = "0.0.0"
 
 // BuildTime is initialized at compilation time
-var BuildTime = time.Now().Format(time.RFC3339)
+var BuildTime = "2016-06-29T00:39:38+0200"
 
 func main() {
 	var urlFlag = flag.String("url", "mongodb://localhost:27017/test", "MongoDB connection URI.")
