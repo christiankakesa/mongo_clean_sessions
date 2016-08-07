@@ -5,8 +5,8 @@ Utility program to cleanup MongoDB collection by a specific time field.
 ### Download your platform archive
 Go to the **[releases]( https://github.com/fenicks/mongo_clean_sessions/releases)** section: https://github.com/fenicks/mongo_clean_sessions/releases, download and uncompress the archive corresponding to your platform:
 
-    wget https://github.com/fenicks/mongo_clean_sessions/releases/download/v0.9/mongo_clean_sessions-v0.9-linux-amd64.tar.gz
-    tar -xzf mongo_clean_sessions-v0.9-linux-amd64.tar.gz
+    wget https://github.com/fenicks/mongo_clean_sessions/releases/download/v0.9/mongo_clean_sessions-v1.1-linux-amd64.tar.gz
+    tar -xzf mongo_clean_sessions-v1.1-linux-amd64.tar.gz
 
 Run the program as described in next sections.
 
